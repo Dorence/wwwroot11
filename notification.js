@@ -31,7 +31,7 @@ var FERD_NavNotice = {
 	arrObj : [],
 	noticeTitle : "感谢订阅！",
 	noticeBody:"腾讯网推荐服务  点击查看",
-	noticeIcon : "//mat1.gtimg.com/news/lmz/navnotice/images/qqlogo.png",
+	noticeIcon : "http://mat1.gtimg.com/news/lmz/navnotice/images/qqlogo.png",
 	noticeUrl : "http://www.qq.com/chrometips/welcome.htm",
 	notification : "",
 	site : "",
