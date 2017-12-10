@@ -1,0 +1,151 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>table02</title>
+<link href="assets/bootstrap-3.3.7.min.css" rel="stylesheet">
+<!--<link href="../../src/css/font-awesome-4.7.0.min.css" rel="stylesheet">-->
+<script src="assets/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="assets/bootstrap-3.3.7.min.js" type="text/javascript"></script>
+<script src="cocmain.js" type="text/javascript"></script>
+<style type="text/css">
+table,th,td{border:1px solid #000;text-align:center;vertical-align:middle;}
+tr:nth-child(odd){background-color:#DDEBF7;color: #000;}
+tr:nth-child(even){background-color:#fefefe;color: #000;}
+input,select
+{
+    font-size: inherit;
+    width: 98%;
+    height: 95%;
+    border: none;
+    background: inherit;
+}
+.attrtable input{text-align: center;}
+.basicinfo {
+    color:black;
+    text-decoration:none;
+    font-family:"微软雅黑";font-size:12pt;font-weight:400;
+    border:1pt solid #000;
+    white-space:nowrap;
+    width: 100%;
+}
+th
+{
+    color:#fff;
+    font-size:14pt;
+    font-weight:800;
+    background:#5B9BD5;
+}
+</style>
+</head>
+
+<body>
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="border: 1px solid #ccc; padding: 10px;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 200px;">
+    <table class="basicinfo" cellspacing="0" cellpadding="0">
+        <col width="15%"><col width="45%">
+        <col width="15%"><col width="25%">
+        <tr><th colspan="4">调查员信息</th></tr>
+        <tr><td>姓名</td><td colspan="3"><input id="playername" placeholder="请输入姓名"></td></tr>
+        <tr><td>玩家</td><td><input id="playerid" placeholder="真名/NPC"></td><td>时代</td><td><input id="playertime" placeholder="年代"></td></tr>
+        <tr><td>职业</td><td colspan="3"><input id="playerjob" placeholder="请输入职业"></td></tr>
+        <tr>
+            <td onClick="showinfo(0)">年龄</td><td onClick="showinfo(0)"><input id="playerage" type="number" placeholder="年龄:15-89" min="15" max="89"></td>
+            <td onClick="showinfo(11)">性别</td><td onClick="showinfo(11)"><select id="playersex"><option value="male" selected="selected">♂男</option><option value="female">♀女</option></select></td>
+        </tr>
+        <tr><td>住地</td><td colspan="3"><small>没什么卵用就不加输入框了...</small></td></tr>
+        <tr><td onClick="showinfo(1)">出生地</td><td colspan="3" onClick="showinfo(1)"><input id="playerBplace" placeholder="请输入故乡"></td></tr>
+    </table>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border: 2px solid #101010;min-height: 300px;">
+        <p id="infoshowHere" style="padding-top: 10px;"></p>
+    </div>   
+</div>
+<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="border: 1px solid #ccc; padding: 10px;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 200px;">
+    <table class="attrtable" cellspacing="0" cellpadding="0">
+        <col width="11.1%" span="9">
+        <tr><th colspan="9">属性&nbsp;&nbsp;<a href="javascript:void(0);" onClick="refreshAttr();">刷新</a></th></tr>
+        <tr>
+            <td rowspan="2" onClick="showinfo(2)">力量STR</td>
+            <td rowspan="2"><input id="STR" placeholder="STR" onClick="showinfo(2)" type="number" min="0"></td>
+            <td id="STR2">0</td>
+            <td rowspan="2" onClick="showinfo(5)">敏捷DEX</td>
+            <td rowspan="2"><input id="DEX" placeholder="DEX" onClick="showinfo(5)" type="number" min="0"></td>
+            <td id="DEX2">0</td>
+            <td rowspan="2" onClick="showinfo(8)">意志POW</td>
+            <td rowspan="2"><input id="POW" placeholder="POW" onClick="showinfo(8)" type="number" min="0"></td>
+            <td id="POW2">0</td>
+        </tr>
+        <tr><td id="STR5">0</td><td id="DEX5">0</td><td id="POW5">0</td></tr>
+        <tr>
+            <td rowspan="2" onClick="showinfo(3)">体质CON</td>
+            <td rowspan="2"><input id="CON" placeholder="CON" onClick="showinfo(3)" type="number" min="0"></td>
+            <td id="CON2">0</td>
+            <td rowspan="2" onClick="showinfo(6)">外貌APP</td>
+            <td rowspan="2"><input id="APP" placeholder="APP" onClick="showinfo(6)" type="number" min="0" max="99"></td>
+            <td id="APP2">0</td>
+            <td rowspan="2" onClick="showinfo(9)">教育EDU</td>
+            <td rowspan="2"><input id="EDU" placeholder="EDU" onClick="showinfo(9)" type="number" min="0" max="99"></td>
+            <td id="EDU2">0</td>
+        </tr>
+        <tr><td id="CON5">0</td><td id="APP5">0</td><td id="EDU5">0</td></tr>
+        <tr>
+            <td rowspan="2" onClick="showinfo(4)">体型SIZ</td>
+            <td rowspan="2"><input id="SIZ" placeholder="SIZ" onClick="showinfo(4)" type="number" min="0"></td>
+            <td id="SIZ2">0</td>
+            <td rowspan="2" onClick="showinfo(7)">智力INT</td>
+            <td rowspan="2"><input id="INT" placeholder="INT" onClick="showinfo(7)" type="number" min="0"></td>
+            <td id="INT2">0</td>
+            <td rowspan="2">移动速度MOV</td>
+            <td rowspan="2" id="MOVV"></td>
+            <td>调整值</td>
+        </tr>
+        <tr><td id="SIZ5">0</td><td id="INT5">0</td><td>±0</td></tr>
+    </table>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <table cellspacing="0" cellpadding="0" style="width: 95%;">
+        <col width="50%" span="2">
+        <tr><th colspan="2">衍生属性</th></tr>
+        <tr><td>体力&nbsp;HP</td><td id="hitpnt">/0</td></tr>
+        <tr><td>理智&nbsp;Sanity</td><td id="sanpnt">/0</td></tr>
+        <tr onClick="showinfo(12)"><td>幸运&nbsp;Luck</td><td><input id="lucpnt" placeholder="幸运:1-99" type="number" min="1" max="99"></td></tr>
+        <tr><td>魔法&nbsp;MP</td><td id="magpnt">/0</td></tr>
+        <tr>
+            <td>状态&nbsp;State</td>
+            <td><select id="playerstate">
+                <option selected="selected">健康</option>
+                <option>昏迷</option>
+                <option>重伤</option>
+                <option>濒死</option>
+            </select></td>
+        </tr>
+        <tr onClick="showinfo(10)">
+            <td>疯狂状态</td>
+            <td><select id="spstate">
+                <option selected="selected">神智清醒</option>
+                <option>临时性疯狂</option>
+                <option>不定性疯狂</option>
+                <option>永久性疯狂</option>
+            </select></td>
+        </tr>
+        </table>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <table cellspacing="0" cellpadding="0" style="width: 80%;">
+        <col width="50%"><col width="35%"><col width="15%">
+        <tr><th colspan="3">格斗</th></tr>
+        <tr onClick="showinfo(13)"><td>伤害加值 Damage Bonus</td><td id="DBP" colspan="2">?</td></tr>
+        <tr onClick="showinfo(13)"><td>体格Build</td><td id="BLD" colspan="2">?</td></tr>
+        <tr><td rowspan="2">闪避Dodge</td><td rowspan="2">0</td><td>0</td></tr>
+        <tr><td>0</td></tr>
+        <tr><td>护甲Armor</td><td colspan="2">?</td></tr>
+    </table>
+    </div>
+</div>
+    </div>
+
+</body>
+</html>

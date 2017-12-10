@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>NBA Schedule - DORENCE</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="assets/main-schedule.css">
+<link rel="stylesheet" href="assets/bootstrap-3.3.7.min.css">
+<script src="assets/jquery-1.12.4.min.js"></script>
+<script src="assets/nba_team_ids.json"></script>
+<script src="assets/require.js"></script>
+<style>
+/*页脚*/
+	.nba-footer{border-top:3px solid #d43456;font-family:"微软雅黑",sans-serif;background-color: #005897;}
+	.nba-footer .nba-links {float:left;display:block;}
+	.nba-footer .nba-links h4{color:#fff;font-size:20px;margin:8px;}
+	.nba-footer .nba-links ul li{line-height:20px;margin:0px 10px;}
+	.nba-footer .nba-links ul li a{font-size:12px;color:#5398e0;text-decoration:none}
+	.nba-footer .nba-links ul li a:hover{color:#EDEDED;}
+/*头部*/
+.nba-header{min-width:1000px;font-family:"Microsoft YaHei",sans-serif;}
+.nba-header a,.nba-header div,.nba-header h1,.nba-header h2,.nba-header h3,.nba-header h4,.nba-header h5,.nba-header li,.nba-header ol,.nba-header p,.nba-header ul{margin:0;padding:0}
+.nba-header ol,.nba-header ul{list-style:none}
+.nba-header img{border:0}
+.nba-header .cf:after,.nba-header .cf:before{content:" ";display:table}
+.nba-header .cf:after{clear:both}
+.nba-header .cf{*zoom:1}
+.nba-header .nba-header-layout{margin:0 auto;position:relative;z-index:10}
+
+.nba-header .nba-header-top{height:70px;background-color:#005CA1;color:#FFF;font-size:28px;line-height:60px;}
+
+.nba-header .nba-header-nav{height:60px;line-height:60px;background-position:top center;background-repeat:no-repeat}
+.nba-header .nba-header-nav a{text-decoration:none;color:#fff}
+.nba-header .nba-header-nav a:hover{color:#4bacfe;text-decoration:none}
+
+.nba-header .nba-header-nav .nav-icon-pic{background-position:-21px -32px}
+.nba-header .nba-header-nav .nav-icon-submenu{display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;vertical-align:top;width:6px;height:4px;margin-left:6px;margin-top:23px;background-position:-7px -56px}
+.nba-header .nba-header-nav .nav-split{float:left;background-color:#004372;width:1px;height:16px;margin:18px 20px 16px}
+.nba-header .nba-header-nav ul.nav-list{display:block;float:left}
+.nba-header .nba-header-nav ul.nav-list li{float:left;font-size:16px;background-position:bottom center;background-repeat:no-repeat}
+.nba-header .nba-header-nav ul.nav-list li a.nav-a-tl{display:block;padding:0 10px}
+.nba-header .nba-header-nav ul.nav-list li a.nav-a-tl:hover .nav-icon-pic{background-position:0 -32px}
+.nba-header .nba-header-nav ul.nav-list li.nav-link-shouye{margin-right:10px}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu a:hover .nav-icon-submenu{background-position:0 -56px}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu{display:none;visibility:hidden;position:absolute;
+top:60px;left:50%;z-index:99;min-height:200px;background-color:#014576;border-bottom:2px solid #d33556}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu .layout{margin:0 auto;position:relative}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu-list{width:70px;margin-left:-35px;min-height:0;border:none}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu-list a{display:block;text-align:center;height:36px;line-height:36px;border-bottom:1px solid #003d69;border-top:1px solid #01538d}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu-list a:first-child{border-top:none}
+.nba-header .nba-header-nav ul.nav-list li.has-submenu div.submenu-list a:last-child{border-bottom:none}
+.nba-header .nba-header-nav ul.nav-list .has-submenu-type-list{position:relative}
+.nba-header .nba-header-nav-submenu-enable ul li.has-submenu:hover a.nav-a-tl,.nba-header .nba-header-nav-submenu-enable ul li.show-submenu a.nav-a-tl{color:#FFF}
+.nba-header .nba-header-nav-submenu-enable ul li.has-submenu:hover a.nav-a-tl .nav-icon-submenu,.nba-header .nba-header-nav-submenu-enable ul li.show-submenu a.nav-a-tl .nav-icon-submenu{background-position:-7px -56px}
+.nba-header .nba-header-nav-submenu-enable ul li.has-submenu:hover div.submenu,.nba-header .nba-header-nav-submenu-enable ul li.show-submenu div.submenu{display:block;visibility:visible}
+.nba-header-magnet{padding-bottom:50px}
+.nba-header-magnet .nba-header-nav{position:fixed;top:0;z-index:199;width:100%}
+
+.nba-header-thin .nba-header-layout{width:1000px}
+
+.nba-header-thin .nba-header-nav{background-image:url(assets/i/header_nav_bg_1k.png)}
+.nba-header-thin .nba-header-nav ul li.has-submenu div.submenu{width:1000px;margin-left:-500px}.nba-header-thin .nba-header-nav ul.nav-list-right li a.nav-a-tl{padding:0 9px}
+.nba-header-thin .nba-sm-shequ .hotposts{width:660px}
+.nba-header-thin .nba-sm-shequ .hotposts .posts ul{width:300px}
+
+.nba-header-short .nba-header-nav ul.nav-list li.has-submenu div.submenu{top:50px}
+
+.nba-header .submenu li.pic-item{display:block;float:left;position:relative;width:240px;height:135px;margin-right:40px}
+.nba-header .submenu li.pic-item a{display:block;width:100%;height:100%;background-color:#6870A9;position:relative;overflow:hidden}
+.nba-header .submenu li.pic-item a img{display:block;width:100%;height:100%;border:0;-webkit-transition:transform .3s ease-out;-moz-transition:transform .3s ease-out;-ms-transition:transform .3s ease-out;-o-transition:transform .3s ease-out;transition:transform .3s ease-out}
+.nba-header .submenu li.pic-item a p{position:absolute;left:0;bottom:0;width:100%;height:30px;line-height:30px;font-size:14px;background-color:#000;background-color:rgba(0,0,0,.6);color:#FFF;text-indent:1em}
+.nba-header .submenu li.pic-item a div.tag{position:absolute;top:0;left:0;font-size:12px;text-align:center;min-width:56px;height:25px;line-height:25px;padding:0 12px;color:#FFF;background-color:#D33556}
+.nba-header .submenu li.pic-item a div.tag:after{content:'';position:absolute;top:0;right:-16px;width:0;height:0;font-size:0;border-style:solid;border-width:25px 16px 0 0;border-color:#d33557 transparent transparent}
+
+.nba-header .submenu li.pic-item a:hover img{-webkit-transform:scale(1.05);-moz-transform:scale(1.05);-ms-transform:scale(1.05);-o-transform:scale(1.05);transform:scale(1.05)}
+.nba-header .nba-sm-qiudui .layout,.nba-header .nba-sm-qiuyuan .players-list{border-left:1px solid #004576;border-right:1px solid #004576}
+.nba-header .nba-sm-qiuyuan{background-color:#fff}
+.nba-header .nba-sm-qiuyuan .banner{height:35px;line-height:35px;color:#FFF;position:relative;background:url(assets/i/header_player_banner.png) left top no-repeat #004576}
+.nba-header .nba-sm-qiuyuan .banner h3{margin-left:42px;font-size:14px;font-weight:400;cursor:default}
+.nba-header .nba-sm-qiuyuan .players-list ul{padding:20px 14px}
+.nba-header .nba-sm-qiuyuan .players-list ul li{display:block;float:left;margin:15px 0;width:10%}
+.nba-header .nba-sm-qiuyuan .players-list ul li a{display:block;width:70px;margin:0 auto;text-align:center;line-height:1;padding-top:60px;background-position:top center;background-repeat:no-repeat}
+.nba-header .nba-sm-qiuyuan .players-list ul li a strong{color:#081626;display:block;padding-top:6px;font-weight:400;font-size:14px}
+.nba-header .nba-sm-qiuyuan .players-list ul li a:hover strong{color:#f23d63}
+.nba-header .nba-sm-qiudui{background-color:#fff}
+.nba-header .nba-sm-qiudui .teams-block{width:50%;float:left}
+.nba-header .nba-sm-qiudui .teams-block .banner{height:35px;line-height:35px;color:#FFF;background:url(assets/i/header_player_banner.png) left top no-repeat #f3f3f3}
+.nba-header .nba-sm-qiudui .teams-block .banner h3{margin-left:42px;font-size:14px;font-weight:400;cursor:default}
+.nba-header .nba-sm-qiudui .teams-block .banner-blue{background-color:#004576}
+.nba-header .nba-sm-qiudui .teams-block .teams-list{background-color:#fff;padding:0 9px 0 10px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li{display:block;float:left;width:20%;padding:17px 0}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.team-logo-40{display:block;line-height:1;height:50px;background-image:url(assets/i/teamlogo.png);background-position:left center;background-repeat:no-repeat;padding-left:50px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.team-logo-40 strong{display:inline;display:inline-block;line-height:50px;vertical-align:top;color:#081626;font-weight:400;font-size:14px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.team-logo-40:hover strong{color:#f23d63}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.hornets{background-position:-15px -934px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.cavaliers{background-position:-15px -504px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.raptors{background-position:-15px -342px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.hawks{background-position:-15px -851px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.bulls{background-position:-15px -430px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.knicks{background-position:-15px -179px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.wizards{background-position:-15px -1182px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.pistons{background-position:-15px -584px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.celtics{background-position:-15px -20px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.magic{background-position:-15px -1096px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.pacers{background-position:-15px -663px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.nets{background-position:-15px -105px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.heat{background-position:-15px -1018px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.bucks{background-position:-15px -752px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.sixers{background-position:-15px -260px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.warriors{background-position:-15px -1679px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.jazz{background-position:-15px -1591px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.spurs{background-position:-15px -2473px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.clippers{background-position:-15px -1768px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.thunder{background-position:-15px -1427px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.rockets{background-position:-15px -2225px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.kings{background-position:-15px -2044px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.blazers{background-position:-15px -1511px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.grizzlies{background-position:-15px -2304px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.lakers{background-position:-15px -1859px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.nuggets{background-position:-15px -1263px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.pelicans{background-position:-15px -2385px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.suns{background-position:-15px -1948px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.timberwolves{background-position:-15px -1342px}
+.nba-header .nba-sm-qiudui .teams-block .teams-list ul li a.mavericks{background-position:-15px -2134px}
+</style>
+</head>
+<body>
+
+<div class="nba-header nba-header-thin nba-header-short">
+    <div class="nba-header-top">&nbsp;&nbsp;NBA数据库 赛程 Mini</div>
+    <div class="nba-header-nav">
+        <div class="nba-header-layout">
+            <ul class="nav-list nav-list-right">
+    <li><a class="nav-a-tl" href="http://nba.stats.qq.com/schedule">赛程</a></li>
+    <li><a class="nav-a-tl" href="http://nba.stats.qq.com/standings">排名</a></li>
+    <li class="nav-link-qiuyuan has-submenu">
+        <a class="nav-a-tl" href="http://nba.stats.qq.com/player/list.htm">球员&darr;</a>
+        <div class="submenu"><!-- 子菜单：球员  开始--><div class="nba-sm-qiuyuan">
+            <div class="layout">
+            <div class="banner"><h3>现役巨星</h3></div>
+            <div class="players-list">
+                <ul class="cf">
+                    <li><a href="http://nba.stats.qq.com/player/?id=3704" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/102/147/1902/123715137.jpg)"><strong>詹姆斯</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4612" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/80/151/1902/123716135.jpg)"><strong>库里</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4563" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/128/153/1902/123716693.jpg)"><strong>哈登</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4244" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/108/12/2149/139741893.jpg)"><strong>杜兰特</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/team/?type=player&id=4896" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/5/12/2149/139741790.jpg)"><strong>莱昂纳德</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4390" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/238/155/1902/123717313.jpg)"><strong>韦斯布鲁克</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4795" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/93/16/2149/139742898.jpg)"><strong>林书豪</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=5007" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/254/163/1902/123719369.jpg)"><strong>戴维斯</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=3708" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/24/13/2149/139742064.jpg)"><strong>韦德</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=3706" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/234/149/1902/123715779.jpg)"><strong>安东尼</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=3818" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/219/12/2149/139742004.jpg)"><strong>霍华德</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4725" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/36/168/1902/123720426.jpg)"><strong>乔治</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=3930" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/97/158/1902/123717937.jpg)"><strong>保罗</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4561" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/233/158/1902/123718073.jpg)"><strong>格里芬</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4840" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/236/160/1902/123718586.jpg)"><strong>欧文</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=4892" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/48/162/1902/123718908.jpg)"><strong>汤普森</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/player/?id=3252" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/198/15/2149/139742748.jpg)"><strong>诺维茨基</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/team/?type=player&id=5012" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/42/15/2149/139742592.jpg)"><strong>利拉德</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/team/?type=player&id=5546" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/72/14/2149/139742367.jpg)"><strong>唐斯</strong></a></li>
+                    <li><a href="http://nba.stats.qq.com/team/?type=player&id=4720" target="_blank" style="background-image:url(http://img1.gtimg.com/sports/pics/hv1/52/13/2149/139742092.jpg)"><strong>考辛斯</strong></a></li>
+                </ul>
+            </div>
+            </div>
+        </div><!-- 子菜单: 球员  结束--></div>
+    </li>
+    <li class="nav-link-qiudui has-submenu">
+        <a class="nav-a-tl" href="http://nba.stats.qq.com/team/list.htm">球队&darr;</a>
+        <div class="submenu"><!-- 子菜单：球队  开始--><div class="nba-sm-qiudui">
+        <div class="layout cf">
+            <div class="teams-block">
+                <div class="banner banner-blue"><h3>大西洋赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=celtics"  target="_blank" class="team-logo-40 celtics"><strong style="line-height:20px;padding:5px 0;">凯尔<br>特人</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=nets" target="_blank" class="team-logo-40 nets"><strong>篮网</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=knicks" target="_blank" class="team-logo-40 knicks"><strong>尼克斯</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=sixers" target="_blank" class="team-logo-40 sixers"><strong>76人</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=raptors" target="_blank" class="team-logo-40 raptors"><strong>猛龙</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teams-block">
+                <div class="banner banner-blue"><h3>西北赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=nuggets"  target="_blank" class="team-logo-40 nuggets"><strong>掘金</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=blazers" target="_blank" class="team-logo-40 blazers"><strong>开拓者</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=timberwolves" target="_blank" class="team-logo-40 timberwolves"><strong>森林狼</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=thunder" target="_blank" class="team-logo-40 thunder"><strong>雷霆</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=jazz" target="_blank" class="team-logo-40 jazz"><strong>爵士</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teams-block">
+                <div class="banner"><h3>中部赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=bulls"  target="_blank" class="team-logo-40 bulls"><strong>公牛</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=cavaliers"  target="_blank" class="team-logo-40 cavaliers"><strong>骑士</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=pistons"  target="_blank" class="team-logo-40 pistons"><strong>活塞</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=pacers" target="_blank" class="team-logo-40 pacers"><strong>步行者</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=bucks" target="_blank" class="team-logo-40 bucks"><strong>雄鹿</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teams-block">
+                <div class="banner"><h3>太平洋赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=warriors"  target="_blank" class="team-logo-40 warriors"><strong>勇士</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=clippers" target="_blank" class="team-logo-40 clippers"><strong>快船</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=lakers" target="_blank" class="team-logo-40 lakers"><strong>湖人</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=suns" target="_blank" class="team-logo-40 suns"><strong>太阳</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=kings" target="_blank" class="team-logo-40 kings"><strong>国王</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teams-block">
+                <div class="banner"><h3>东南赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=hawks"  target="_blank" class="team-logo-40 hawks"><strong>老鹰</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=hornets" target="_blank" class="team-logo-40 hornets"><strong>黄蜂</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=heat" target="_blank" class="team-logo-40 heat"><strong>热火</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=magic" target="_blank" class="team-logo-40 magic"><strong>魔术</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=wizards" target="_blank" class="team-logo-40 wizards"><strong>奇才</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="teams-block">
+                <div class="banner"><h3>西南赛区</h3></div>
+                <div class="teams-list">
+                    <ul class="cf">
+                        <li><a href="http://nba.stats.qq.com/team/?id=mavericks"  target="_blank" class="team-logo-40 mavericks"><strong>小牛</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=rockets" target="_blank" class="team-logo-40 rockets"><strong>火箭</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=grizzlies" target="_blank" class="team-logo-40 grizzlies"><strong>灰熊</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=pelicans"  target="_blank" class="team-logo-40 pelicans"><strong>鹈鹕</strong></a></li>
+                        <li><a href="http://nba.stats.qq.com/team/?id=spurs" target="_blank" class="team-logo-40 spurs"><strong>马刺</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div><!-- 子菜单：球队  结束--></div>
+    </li>
+    <li><a class="nav-a-tl" href="http://nba.stats.qq.com/playoffs">季后赛</a></li>
+    <li><a class="nav-a-tl" href="http://nba.stats.qq.com/stats">数据统计</a></li>
+    <li><a class="nav-a-tl" href="http://nba.stats.qq.com/compare">数据对比</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>// NBA公共头部 脚本
+!function(e,n)
+{
+    var t=e(".nba-header"),a=[],o=null,s=300,
+        r="nba-header-nav-submenu-enable",u=t.find(".nba-header-nav");
+    u.on("mouseenter",function(){o=setTimeout(function(){for(u.addClass(r);a.length>0;)a.pop().call()},s)})
+    .on("mouseleave",function(){o&&clearTimeout(o),u.removeClass(r)});
+    var i=t.find(".nba-header-top"),l=!1;
+    (!/\bMSIE 6/.test(navigator.userAgent)||n.opera)&&e(n).on("scroll",function(){e(n).scrollTop()>i.height()?l||(t.addClass("nba-header-magnet"),l=!0):l&&(t.removeClass("nba-header-magnet"),l=!1)})
+}(jQuery,window,document);
+!function(n){
+    var o={},t="jLogin",i={login:[],logout:[]};
+    o.on=function(n,o){n&&"function"==typeof o&&i[n]&&i[n].push(o)},window[t]=o,
+    n&&n.ajax({url:"assets/sports-web-api.js",dataType:"script",scriptCharset:"utf-8"}).done(function(){;})
+}(window.jQuery);
+</script>
+<!-- NBA公共头部 结束 -->
+
+<div class="headlineC">
+    <div class="headline">
+    <div class="icon"></div>
+    <h2 class="title"><!--赛季--></h2><i class="type" id="seasonType"><!--赛季类型--></i>
+    <div class="page">
+        <a href="javascript:;" class="forward">&lt;&nbsp;前七天</a>
+        <span class="date">加载中...</span>
+        <a href="javascript:;" class="backward">后七天&nbsp;&gt;</a>
+    </div>
+    </div>
+</div>
+<div class="stream"></div>
+<div class="prompt" style="display: none">无赛事</div>
+
+<script>
+!function(t,e){
+	"use strict";
+	function a()
+	{
+		var t,e,a=(""+p.catalog_full).replace(/-/g,".").replace(/_/g,"-");
+		p.topic&&p.topic.name&&p.topic.name.length>0?(t="L.",e="Z."+a+"."+p.topic.name):(t="L."+a,e="Z.");
+		var n="W."+p.type,
+			o="M."+p.tpl.type+p.tpl.stype,
+			i="P."+(""+p.site).replace(/_/g,"-"),
+			c="F."+f,
+			l=t+"_"+e+"_"+n+"_"+o+"_"+i+"_"+c;
+		l&&r({pgUserType:l})
+	}
+	function n(t)
+	{
+		o(e,"click",
+		function(e)
+		{
+			var a=e.target;
+			"img"===a.tagName&&(a=a.parentNode);
+			var n=a.tagName.toLowerCase(),o=a.getAttribute("href");
+			if(!o||o.indexOf("qqcom_pgv_from=")>-1)return!1;
+			if("a"===n&&a.hostname&&a.hostname.indexOf("qq.com")>-1)
+			{
+				var r=o+(a.search?"&":"?")+"qqcom_pgv_from="+t;
+				a.setAttribute("href",r)
+			}
+		})
+	}
+	function o(a,n,o)
+	{
+		var r=function(a)
+		{
+			return a=a||t.event,
+				a.target||(a.target=a.srcElement||e),
+				3===a.target.nodeType&&(a.target=a.target.parentNode),
+				a
+		};
+		return a.addEventListener?a.addEventListener(n,function(t){o.call(t.currentTarget,r(t))},!1):a.attachEvent("on"+n,function(t){o.call(a,r(t))}),!0
+	}
+	if(!t||!t.location||"function"!=typeof t.pgvMain)return!1;
+	var r=function(){var e=arguments;setTimeout(function(){t.pgvMain.apply(this,e)},0)},
+		i=location.search.replace(/adtag=client\.qq\.\d+_\.0/i,"from=tips"),
+		c=["aio","tips"],
+		f="def";
+	location.search.indexOf("qqcom_pgv_from=")>-1&&(f=location.host+location.pathname+location.search);
+	var p=t.ARTICLE_INFO||null,l=p&&p.catalog_full;
+	if(l) for(var g=0;g<c.length;g+=1) if(i.indexOf(c[g])>-1){n(c[g]);break}
+	l&&a(),l||("undefined"!=typeof whatCatalog&&(t.pvCSTM=t.whatCatalog),r({pgUserType:"F."+f}))
+}(window,document);
+</script>
+
+<footer><div class="nba-footer container">
+    <div class="nba-links col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <h4>NBA规则</h4>
+        <ul class="list-group">
+            <li><a href="http://sports.qq.com/a/20150824/053545.htm">24秒违例</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/053740.htm">走步违例</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/054568.htm">回场违例</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/053913.htm">3秒违例</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/054551.htm">8秒违例</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/053926.htm">技术犯规</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/054016.htm">恶意犯规</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/054042.htm">个人犯规</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/054063.htm">干扰球</a></li>
+        </ul>
+    </div>
+    <div class="nba-links col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <h4>NBA资料</h4>
+        <ul class="list-group">
+            <li><a href="http://sports.qq.com/a/20150819/057018.htm">历届总冠军</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/022024.htm">历届常规赛MVP</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/026656.htm">历届总决赛MVP</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/027590.htm">历届最佳新秀</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/028448.htm">历届最佳教练</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/030317.htm">历届选秀状元</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/031009.htm">历届得分王</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/032123.htm">历届篮板王</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/032661.htm">历届助攻王</a></li>
+        </ul>
+    </div>
+    <div class="nba-links col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <h4>NBA纪录</h4>
+        <ul>
+            <li><a href="http://sports.qq.com/a/20150824/045439.htm">球队连胜纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/051396.htm">球队常规赛得分纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/050289.htm">球队季后赛得分纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/045531.htm">个人单场得分纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/038368.htm">个人总决赛得分纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/042623.htm">个人生涯总得分纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/053862.htm">个人生涯总篮板纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/051905.htm">个人生涯总助攻纪录</a></li>
+            <li><a href="http://sports.qq.com/a/20150824/053440.htm">个人生涯总盖帽纪录</a></li>
+        </ul>
+    </div>
+    <div class="nba-links col-lg-3 col-md-3 col-sm-3 col-xs-6"><h4>&copy;2017 MR.D</h4></div>
+</div></footer>
+
+<script src="assets/main-scheduley.js"></script>
+</body>
+</html>
