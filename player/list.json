@@ -1,0 +1,9 @@
+﻿{"listGroup":[
+	{"id":"news","name":"CCTV13 新闻","src":"list/news.json"},
+	{"id":"fun","name":"fun","src":"list/fun.json"},
+	{"id":"voa","name":"VOAChina","src":"list/voa.json"},
+	{"id":"che","name":"疯狂化学","src":"list/chem.json"},
+	{"id":"sakura","name":"Sakura","src":"list/sakura.json"},
+	{"id":"detail","name":"Detail - Kobe","src":"list/detail.json"}
+],"currList":"news"
+}

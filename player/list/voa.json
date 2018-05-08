@@ -1,0 +1,77 @@
+﻿{"list":[
+	{
+		"name":"焦点对话2018 (mp4)",
+		"root":"../../v/v/voa2018jddh/",
+		"list":[
+			{"name":"0427","src":"jiaodianduihua0427.mp4"},
+			{"name":"0330","src":"jiaodianduihua0330.mp4"},
+			{"name":"0323","src":"jiaodianduihua0323.mp4"},
+			{"name":"0316","src":"jiaodianduihua0316.mp4"},
+			{"name":"0309","src":"jiaodianduihua0309.mp4"},
+			{"name":"0302","src":"jiaodianduihua0302.mp4"},
+			{"name":"0223","src":"jiaodianduihua0223.mp4"}
+		]
+	},{
+		"name":"焦点对话2017 (mp4)",
+		"root":"../../v/v/voa2017jddh/",
+		"list":[
+			{"name":"1222","src":"jiaodianduihua1222.mp4"},
+			{"name":"1215","src":"jiaodianduihua1215.mp4"},
+			{"name":"1201","src":"jiaodianduihua1201.mp4"},
+			{"name":"1117","src":"jiaodianduihua1117.mp4"},
+			{"name":"1103","src":"jiaodianduihua1103.mp4"},
+			{"name":"1027","src":"jiaodianduihua1027.mp4"},
+			{"name":"1020","src":"jiaodianduihua1020.mp4"},
+			{"name":"1013","src":"jiaodianduihua1013.mp4"},
+			{"name":"1006","src":"jiaodianduihua1006.mp4"},
+			{"name":"0922","src":"jiaodianduihua0922.mp4"},
+
+		]
+	},
+	{"name":"沉浮70载中朝关系的传承与演变","src":"../../v/v/voa/chenfu70zaiZCguanxidechuanchengyuyanbian.mp4"},
+	{
+		"name":"海峡论坛2018 (mp4)",
+		"root":"../../v/v/voa2018hxlt/",
+		"list":[
+			{"name":"0429","src":"haixialuntan0429.mp4"},
+			{"name":"0318","src":"haixialuntan0318.mp4"},
+			{"name":"0211","src":"haixialuntan0211.mp4"}
+		]
+	},{
+		"name":"海峡论坛2017 (mp4)",
+		"root":"../../v/v/voa2017hxlt/",
+		"list":[
+			{"name":"1029","src":"haixialuntan1029.mp4"},
+			{"name":"1008-1","src":"haixialuntan1008-1.mp4"},
+			{"name":"1008-2","src":"haixialuntan1008-2.mp4"}
+		]
+	},{
+		"name":"时事大家谈2018 (mp4)",
+		"root":"../../v/v/voa2018ssdjt/",
+		"list":[
+			{"name":"0313","src":"shishidajiatan0313.mp4"},
+			{"name":"0308","src":"shishidajiatan0308.mp4"},
+			{"name":"0226","src":"shishidajiatan0226.mp4"},
+			{"name":"0208","src":"shishidajiatan0208.mp4"},
+			{"name":"0208","src":"shishidajiatan0208.mp4"},
+			{"name":"0125","src":"shishidajiatan0125.mp4"},
+			{"name":"0111","src":"shishidajiatan0111.mp4"},
+			{"name":"0103","src":"shishidajiatan0103.mp4"},
+			{"name":"0102","src":"shishidajiatan0102.mp4"},
+			{"name":"0101","src":"shishidajiatan0101.mp4"}
+		]
+	},{
+		"name":"时事大家谈2017 (mp4)",
+		"root":"../../v/v/voa2017ssdjt/",
+		"list":[
+			{"name":"1207","src":"shishidajiatan1207.mp4"},
+			{"name":"1205","src":"shishidajiatan1205.mp4"},
+			{"name":"1123","src":"shishidajiatan1123.mp4"},
+			{"name":"1106","src":"shishidajiatan1106.mp4"},
+			{"name":"1026","src":"shishidajiatan1026.mp4"},
+			{"name":"0927","src":"shishidajiatan0927.mp4"}
+		]
+	},
+	{"name":"中国官造英雄 为何民间质疑?","src":"../../v/v/voa/zhongguoguanzaoyingxiong.mp4"},
+	{"name":"司马南陈破空激辩中国时局","src":"../../v/v/voa/chenpokongsimanan.mp4"}
+]}

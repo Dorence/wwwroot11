@@ -1,0 +1,59 @@
+﻿{"list":[
+	{"name":"[央视有嘻哈]朱广权:我有特别的天气预报技巧","src":"../../v/b/bilibili/朱广权：我有特别的天气预报技巧.flv"},
+	{"name":"央视主播朱广权:是我的段子冷还是天气冷","src":"../../v/b/bilibili/央视主播朱广权：是我的段子冷还是天气冷.flv"},
+	{"name":"赵丽蓉:记住咯,这叫硬核--探戈","src":"../../v/b/bilibili/赵丽蓉：记住咯，这叫硬核——探戈.flv"},
+	{"name":"“30亿级”国民互动产品喊你魔性点赞","src":"../../v/b/bilibili/30亿级国民互动产品喊你魔性点赞.mp4"},
+	{"name":"点赞中国 宣传片","src":"../../v/b/bilibili/点赞中国宣传片.mp4"},
+	{"name":"迈向新时代! 60秒回顾十九大的精彩瞬间","src":"../../v/b/bilibili/迈向新时代60秒回顾十九大的精彩瞬间.mp4"},
+	{
+		"name":"东京搜查官RE S03 (mp4)",
+		"root":"../../v/t/TokyoGhoulRE/",
+		"list":[
+			{"name":"01","src":"TokyoGhoulRES03E01.mp4"},
+			{"name":"02 欠片 member","src":"TokyoGhoulRES03E02.mp4"},
+			{"name":"03 前夜祭 fresh","src":"TokyoGhoulRES03E03.mp4"},
+			{"name":"04 拍卖会 main","src":"TokyoGhoulRES03E04.mp4"},
+			{"name":"05 凋零之夜","src":"TokyoGhoulRES03E05.mp4"}
+		]
+	},{
+		"name":"魔卡少女樱 CLEAR CARD篇 (flv)",
+		"list":[
+			{"name":"序幕 小樱与两人的小熊","src":"../../v/s/sakuracc/sakuracc00.flv"},
+			{"name":"01 小樱与透明卡牌","src":"../../v/s/sakuracc/sakuracc01.flv"},
+			{"name":"02 小樱与没有出口的房间","src":"../../v/s/sakuracc/sakuracc02.flv"},
+			{"name":"03 小樱的暴雨警报","src":"../../v/s/sakuracc/sakuracc03.flv"},
+			{"name":"04 小樱和优秀转学生","src":"../../v/s/sakuracc/sakuracc04.flv"},
+			{"name":"05 小樱与赏花会上的拉扯争抢","src":"../../v/s/sakuracc/sakuracc05.flv"},
+			{"name":"06 小樱与兔子与月之歌","src":"../../v/s/sakuracc/sakuracc06.flv"},
+			{"name":"07 小樱与庭院躲猫猫游戏","src":"../../v/s/sakuracc/sakuracc07.flv"},
+			{"name":"08 小樱与时钟与捉迷藏","src":"../../v/s/sakuracc/sakuracc08.flv"},
+			{"name":"09 小樱与令人心动的水族馆","src":"../../v/s/sakuracc/sakuracc09.flv"},
+			{"name":"10 小樱与睡眠迷宫","src":"../../v/s/sakuracc/sakuracc10.flv"},
+			{"name":"11 小樱与颠倒的企鹅","src":"../../v/s/sakuracc/sakuracc11.flv"},
+			{"name":"12 小樱与冰之球技大赛","src":"../../v/s/sakuracc/sakuracc12.flv"}
+		]
+	},{
+		"name":"命运石之门0 (mp4)",
+		"root":"../../v/g/gate0/",
+		"list":[
+			{"name":"E01","src":"Gate0E01.mp4"},
+			{"name":"E02","src":"Gate0E02.mp4"},
+			{"name":"E03","src":"Gate0E03.mp4"},
+			{"name":"E04","src":"Gate0E04.mp4"}
+		]
+	},{
+		"name":"Detail",
+		"list":[
+			{"name":"E01 (m3u8)","src":"../../v/d/detail/01/Detail01.m3u8"},
+			{"name":"E01 (mp4)","src":"../../v/d/detail/Detail-01.mp4"},
+            {"name":"E02 (m3u8)","src":"../../v/d/detail/02/Detail02.m3u8"},
+            {"name":"E02 (mp4)","src":"../../v/d/detail/Detail02.mp4"}
+		]
+	},{
+		"name":"暴走大事件 第五季 (mp4)",
+		"list":[
+			{"name":"S05 E36","src":"../../v/b/bzdsj/bzdsjS5E36.mp4"},
+			{"name":"S05 E37","src":"../../v/b/bzdsj/bzdsjS5E37.mp4"}
+		]
+	}
+]}

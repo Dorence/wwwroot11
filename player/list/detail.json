@@ -1,0 +1,8 @@
+﻿{"list":[
+    {"name":"E01 (m3u8)","src":"../../v/d/detail/01/Detail01.m3u8"},
+    {"name":"E01 (mp4)","src":"../../v/d/detail/Detail01.mp4"},
+    {"name":"E02 (m3u8)","src":"../../v/d/detail/02/Detail02.m3u8"},
+    {"name":"E02 (mp4)","src":"../../v/d/detail/Detail02.mp4"},
+	{"name":"E03 (m3u8)","src":"../../v/d/detail/03/Detail03.m3u8"},
+    {"name":"E03 (mp4)","src":"../../v/d/detail/Detail03.mp4"}
+]}
