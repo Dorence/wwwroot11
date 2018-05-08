@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>NBA Schedule</title>
+    <link rel="stylesheet" href="assets/bootstrap-3.3.7.min.css">
+    <script src="assets/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="assets/bootstrap-3.3.7.min.js" type="text/javascript"></script>
+    <script src="assets/datetimepicker.min.js" type="text/javascript"></script>
+<style>
+    body{font-family:"Microsoft YaHei",sans-serif;}
+    th,td{text-align: center;vertical-align: middle!important;}
+    .tday{margin: 15px;width: 98%;min-width: 400px; max-width:600px;}
+    .tday caption{font-size: 20px;color: #000;}
+    .tday tr:nth-child(odd){background-color:#f9f9f9;}
+    .tday tr:nth-child(even){background-color:#fefefe;}
+    .tday tr:hover,.tday tr:focus,.tday tr:active{background-color:rgba(190,221,242,0.8);}
+    .tday a{color: #000;}
+    .tday th{background-color: #EEB422;border-top: none;}
+    #mainC{margin-top: 60px;width: 100%;}
+    #mainC .row{width: 100%;}
+    .teamlogo{width:32px;height: 32px;}
+    .nba-qiudui{width: 400px;left: -100px;}
+    .nba-qiudui a{color: #222;font-weight: 600;}
+    .dropdown-menu .banner a{font-size:18px;font-weight:700;padding-left: 10px;color: #000;}
+    .navbar-default .nav-pills>li>a{font-weight: 600;}
+    .navbar-default .nav-pills>.active>a{font-weight: 600;}
+    .navbar-default .nav-pills .open .dropdown-menu>li>a{font-weight: 500;}
+    footer a{color: #000;text-decoration: none;font-weight: 700;}
+</style>   
+    <link rel="stylesheet" href="assets/datetimepicker.min.css">
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-default" role="navigation" id="heaD"><div class="container-fluid">
+    <div class="navbar-header navbar-brand">NBA Mini&nbsp;</div>
+    <div>
+    <ul class="nav navbar-nav nav-pills">
+        <li class="active"><a href="../../e">首页</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tencent<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://sports.qq.com/nba/" target="_blank"><strong>腾讯体育</strong></a></li>
+                <li><a href="http://nba.stats.qq.com/standings" target="_blank">排名</a></li>
+                <li><a href="http://nba.stats.qq.com/playoffs" target="_blank">季后赛</a></li>
+                <li><a href="http://nba.stats.qq.com/stats" target="_blank">数据统计</a></li>
+                <li><a href="http://nba.stats.qq.com/compare" target="_blank">数据对比</a></li>
+                <li><a href="http://sports.qq.com/nbavideo/topsk/" target="_blank">十佳球</a></li>
+                <li><a href="http://nba.stats.qq.com/player/list.htm" target="_blank">球员</a></li>
+                <li><a href="http://nba.stats.qq.com/rulebook" target="_blank">规则</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hupu<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="https://nba.hupu.com/" target="_blank"><strong>虎扑篮球</strong></a></li>
+                <li><a href="https://voice.hupu.com/nba" target="_blank">新闻</a></li>
+                <li><a href="https://nba.hupu.com/schedule" target="_blank">赛程</a></li>
+                <li><a href="http://v.liangle.com/nba" target="_blank">视频</a></li>
+                <li><a href="https://nba.hupu.com/games" target="_blank">比赛中心</a></li>
+                <li><a href="https://nba.hupu.com/draft/" target="_blank">选秀</a></li>
+                <li><a href="https://nba.hupu.com/wiki/" target="_blank">百科</a></li>
+                <li><a href="https://bbs.hupu.com/streetball" target="_blank">街球</a></li>
+                <li><a href="https://bbs.hupu.com/all-nba" target="_blank">NBA论坛</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">NBA.com<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://china.nba.com/" target="_blank"><strong>NBA中国</strong></a></li>
+                <li><a href="http://china.nba.com/news/" target="_blank">新闻</a></li>
+                <li><a href="http://china.nba.com/standings/" target="_blank">排名</a></li>
+                <li><a href="http://china.nba.com/statistics/" target="_blank">数据</a></li>
+                <li><a href="http://china.nba.com/topics/history.htm" target="_blank">NBA历史</a></li>
+                <li><a href="http://china.nba.com/photos/" target="_blank">图集</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">球队<b class="caret"></b></a>
+            <div class="dropdown-menu nba-qiudui">
+                <div class="banner"><a href="http://nba.stats.qq.com/team/list.htm">球队</a></div>
+                <div id="divTeams"></div>
+            </div>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>日期</strong><b class="caret"></b></a>
+            <div id="datetimepicker" class="dropdown-menu"></div>
+        </li>
+    </ul>
+    </div>
+</div></nav>
+
+<div id="mainC" class="container"><div class="row"><div id="divD" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div></div></div>
+<hr>
+<footer><div class="container" style="margin-left: 20px;"><div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+        <h4>NBA资料</h4>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150819/057018.htm" target="_blank">历届总冠军</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/022024.htm" target="_blank">历届常规赛MVP</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/026656.htm" target="_blank">历届总决赛MVP</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/027590.htm" target="_blank">历届最佳新秀</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/028448.htm" target="_blank">历届最佳教练</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/030317.htm" target="_blank">历届选秀状元</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/031009.htm" target="_blank">历届得分王</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/032123.htm" target="_blank">历届篮板王</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/032661.htm" target="_blank">历届助攻王</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+        <h4>NBA纪录</h4>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/045439.htm" target="_blank">球队连胜纪录</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/051396.htm" target="_blank">球队常规赛得分纪录</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/050289.htm" target="_blank">球队季后赛得分纪录</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/045531.htm" target="_blank">个人单场得分纪录</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/038368.htm" target="_blank">个人总决赛得分纪录</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/042623.htm" target="_blank">个人生涯总得分纪录</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/053862.htm" target="_blank">个人生涯总篮板纪录</a></li>
+            <li class="list-group-item"><a href="http://sports.qq.com/a/20150824/051905.htm" target="_blank">个人生涯总助攻纪录</a></li>
+            <li class="list-group-item list-group-item-info"><a href="http://sports.qq.com/a/20150824/053440.htm" target="_blank">个人生涯总盖帽纪录</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="qut"></div>
+    </div>
+    <h4><i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;2017 MR.D&nbsp;All rights reserved.</h4>
+</div></footer>
+	<script src="main.js" type="text/javascript"></script>
+</body>
+</html>
