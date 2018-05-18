@@ -120,7 +120,7 @@ function cellGoal(m,idx,ord)
 {
 	if(m.matchPeriod==="0")
     {
-		return "<td><a href=\"http://nba.stats.qq.com/compare/index.htm?type=team&teamId="+m.leftId+","+m.rightId+"\" target=\"_blank\">对&nbsp;比</a></td>";
+		return "<td colspan='3'><a href=\"http://nba.stats.qq.com/compare/index.htm?type=team&teamId="+m.leftId+","+m.rightId+"\" target=\"_blank\">对&nbsp;比</a></td>";
 	}
 	else
 	{
@@ -176,7 +176,7 @@ function processTable(idx,t,offset)
         {
             match.push([t[i].leftName,t[i].rightName,t[i].leftId,t[i].rightId]);
             o+="<tr>";
-            o+="<td style='width:65px;padding-right:1px;' rowspan='2'><strong>"+t[i].quarter+"</strong> <small>"+t[i].quarterTime+"</small></td>";
+            o+="<td style='width:65px;padding-right:1px;'><strong>"+t[i].quarter+"</strong> <small>"+t[i].quarterTime+"</small></td>";
             o+=cellTeam(selMatch(t[i],0));
             o+="<td id='L"+idx+String.fromCharCode(i+65)+"'></td>";
             o+=cellGoal(t[i],idx,i);
